@@ -1,0 +1,264 @@
+class Board {
+     //properties
+    +totalMoves int
+    +AllSquares arraylist
+    +chanceCommunityChestCards collections
+    +usedChestCards collections
+    +totalTimesOnSquares arraylist
+    }
+    
+    
+    private String getSquareName(int position) {
+        // Return appropriate square name
+    }
+    
+    // Get square type (Property, Chance, Community Chest, Jail, Go, etc.)
+    private String getSquareType(int position) {
+        // Return square type
+    }
+    
+    // Increment landing counter for a specific square
+    public void incrementLandingCounter(int squarePosition) {
+        squares[squarePosition].incrementLandCount()
+        totalMovesMade++
+    }
+    
+    // Get square at specific position
+    public Square getSquare(int position) {
+        return squares[position]
+    }
+    
+    // Send player to a specific square 
+    public void sendPlayerToSquare(Player player, int targetPosition) {
+        player.setPosition(targetPosition)
+        incrementLandingCounter(targetPosition)
+    }
+    
+    
+    public int getTotalMovesMade() {
+        return totalMovesMade
+    }
+}
+
+class Square {
+     String name
+     String type
+     int landCount
+    
+    public Square(String name, String type) {
+        this.name = name
+        this.type = type
+        this.landCount = 0
+    }
+    
+    public void incrementLandCount() {
+        landCount++
+    }
+    
+    public int getLandCount() {
+        return landCount
+    }
+    
+    public String getName() {
+        return name
+    }
+    
+    public String getType() {
+        return type
+    }
+}
+
+class Deck {
+     List<Card> cards
+     List<Card> discardPile
+     String deckType
+    
+    public Deck(String deckType) {
+        this.deckType = deckType
+        this.cards = new ArrayList<>()
+        this.discardPile = new ArrayList<>()
+        initializeCards()
+        shuffle()
+    }
+    
+    private void initializeCards() {
+        // Initialize all chance or community chest cards
+        if (deckType.equals("Chance")) {
+            // Add Chance cards: Advance to Go, Go to Jail, etc.
+        } else {
+            // Add Community Chest cards: Bank error in your favor, etc.
+        }
+    }
+    
+    private void shuffle() {
+        Collections.shuffle(cards)
+    }
+    
+    public Card drawCard() {
+        if (cards.isEmpty()) {
+            reshuffle()
+        }
+        return cards.remove(0)  // Draw from top
+    }
+    
+    private void reshuffle() {
+        cards.addAll(discardPile)
+        discardPile.clear()
+        shuffle()
+    }
+    
+    public void discardCard(Card card) {
+        discardPile.add(card)
+    }
+abstract class Card {
+    protected String description
+    
+    public abstract void applyEffect(Player player, Board board)
+}
+
+class Turn {
+     Player player
+     Board board
+     int diceRoll1
+     int diceRoll2
+     int consecutiveDoubles
+     boolean isComplete
+    
+    public Turn(Player player, Board board) {
+        this.player = player
+        this.board = board
+        this.consecutiveDoubles = 0
+        this.isComplete = false
+    }
+    
+    public void executeTurn() {
+        consecutiveDoubles = 0
+        boolean hasAnotherTurn = true
+        
+        while (hasAnotherTurn && !isComplete) {
+            // Roll dice
+            rollDice()
+            
+            // Check for third consecutive double
+            if (consecutiveDoubles >= 3) {
+                sendToJailForSpeeding()
+                break
+            }
+            
+            // Move player forward
+            int moveDistance = diceRoll1 + diceRoll2
+            player.moveForward(moveDistance)
+            
+            // Handle passing Go 
+            if (player.passedGo()) {
+                player.position(go_Square)
+            }
+            
+            int currentPosition = player.getPosition()
+            
+            // Process the square landed on
+            processSquareLanding(currentPosition)
+            
+            // Check for doubles to get another turn
+            if (diceRoll1 == diceRoll2) {
+                consecutiveDoubles++
+                hasAnotherTurn = true
+                
+            } else {
+                hasAnotherTurn = false
+                isComplete = true
+            }
+        }
+    }
+    
+    public void rollDice() {
+        // rolling two six-sided dice
+        diceRoll1 = (int)(Math.random() * 6) + 1
+        diceRoll2 = (int)(Math.random() * 6) + 1
+
+    }
+    
+    private void sendToJailForDoubles() {
+        board.sendPlayerToSquare(player, getJailPosition())
+        consecutiveDoubles = 0
+        isComplete = true
+    }
+    
+    private void processSquareLanding(int position) {
+        // Increment landing counter for the square
+        board.incrementLandingCounter(position)
+        
+        Square square = board.getSquare(position)
+        String squareType = square.getType()
+        
+        System.out.println("Landed on: " + square.getName())
+        
+        // Process special squares
+        if (squareType.equals("Chance")) {
+            board.processChanceCard(player)
+        } else if (squareType.equals("Community Chest")) {
+            board.processCommunityChestCard(player)
+        }
+    }  
+    // Getters
+    public int getDiceRoll1() {
+        return diceRoll1
+    }
+    
+    public int getDiceRoll2() {
+        return diceRoll2
+    }
+    
+    public boolean isDouble() {
+        return diceRoll1 == diceRoll2
+    }
+    
+    public int getConsecutiveDoubles() {
+        return consecutiveDoubles
+    }
+}
+
+class Player {
+     String name
+     int position
+     boolean passedGo
+    
+    public Player(String name) {
+        this.name = name
+        this.position = 0  // Start at G
+        this.passedGo = false
+    }
+    
+    public void moveForward(int spaces) {
+        int newPosition = position + spaces
+        passedGo = false
+        
+        if (newPosition >= 40) {
+            passedGo = true
+            newPosition = newPosition % 40
+        }
+        position = newPosition
+    }
+    
+    public boolean passedGo() {
+        return passedGo
+    }
+    
+    public void setPosition(int newPosition) {
+        this.position = newPosition
+    }
+    
+    // Getters and setters
+    public int getPosition() {
+        return position
+    }
+    
+    public String getName() {
+        return name
+    }
+    
+    public int getMoney() {
+        return money
+    }
+}
+}
