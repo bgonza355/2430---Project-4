@@ -12,7 +12,9 @@ public class MonopolyApp {
         GameContext ctx = new GameContext(board, chance, community);
         Dice dice = new Dice(rng);
         PlayerState player = new PlayerState();
-
+        TurnEngine engine = new TurnEngine(ctx, dice);
+        
+        // interesting stuff goes here.
 	}
 
 }

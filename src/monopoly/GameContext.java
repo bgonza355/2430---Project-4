@@ -49,7 +49,7 @@ public class GameContext {
      * This method increments the landing counter for the specific square
      * This should be called once per turn at the end and after the effects
      * have been applied.
-     * @param index
+     * @param index	the square the user lands at.
      */
     public void incrementLanding(int index) {
         landingCounts[Math.floorMod(index, Board.SIZE)]++;
