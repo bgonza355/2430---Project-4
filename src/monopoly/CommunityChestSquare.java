@@ -7,6 +7,6 @@ public final class CommunityChestSquare extends Square {
 
     @Override
     public void resolve(PlayerState player, GameContext ctx) {
-        // not implemented yet
+    	ctx.getCommunityChestDeck().drawAndApply(player, ctx);
     }
 }

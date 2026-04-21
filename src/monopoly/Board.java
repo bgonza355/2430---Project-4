@@ -22,17 +22,35 @@ public final class Board {
     public int size() {
         return SIZE;
     }
+    
+    /**
+     * This method determines the nearest square of the specified
+     * type. 
+     * 
+     * This is used by specific Card Effects that say stuff like
+     * "Move to nearest Railroad" or "Advance to Illinois Avenue".
+     * 
+     * NOTE: It won't return the square the player is currently on
+     * because it will always look ahead.
+     */
+    public int indexOfNearest(int fromIndex, SquareType type) {
+        for (int offset = 1; offset <= SIZE; offset++) {
+            int i = Math.floorMod(fromIndex + offset, SIZE);
+            if (squares[i].getType() == type) return i;
+        }
+        return -1;
+    }
 
     public static Board buildStandard() {
         Square[] s = new Square[SIZE];
         s[0]  = new Square(0,  "GO",                    SquareType.GO);
         s[1]  = new Square(1,  "Mediterranean Avenue",  SquareType.PROPERTY);
-        // s[2]  = new CommunityChestSquare(2,  "Community Chest");
+        s[2]  = new CommunityChestSquare(2,  "Community Chest");
         s[3]  = new Square(3,  "Baltic Avenue",         SquareType.PROPERTY);
         s[4]  = new Square(4,  "Income Tax",            SquareType.TAX);
         s[5]  = new Square(5,  "Reading Railroad",      SquareType.RAILROAD);
         s[6]  = new Square(6,  "Oriental Avenue",       SquareType.PROPERTY);
-        // s[7]  = new ChanceSquare(7,  "Chance");
+        s[7]  = new ChanceSquare(7,  "Chance");
         s[8]  = new Square(8,  "Vermont Avenue",        SquareType.PROPERTY);
         s[9]  = new Square(9,  "Connecticut Avenue",    SquareType.PROPERTY);
         s[10] = new Square(10, "Jail",                  SquareType.JAIL);
@@ -42,12 +60,12 @@ public final class Board {
         s[14] = new Square(14, "Virginia Avenue",       SquareType.PROPERTY);
         s[15] = new Square(15, "Pennsylvania Railroad", SquareType.RAILROAD);
         s[16] = new Square(16, "St. James Place",       SquareType.PROPERTY);
-        // s[17] = new CommunityChestSquare(17, "Community Chest");
+        s[17] = new CommunityChestSquare(17, "Community Chest");
         s[18] = new Square(18, "Tennessee Avenue",      SquareType.PROPERTY);
         s[19] = new Square(19, "New York Avenue",       SquareType.PROPERTY);
         s[20] = new Square(20, "Free Parking",          SquareType.FREE_PARKING);
         s[21] = new Square(21, "Kentucky Avenue",       SquareType.PROPERTY);
-        // s[22] = new ChanceSquare(22, "Chance");
+        s[22] = new ChanceSquare(22, "Chance");
         s[23] = new Square(23, "Indiana Avenue",        SquareType.PROPERTY);
         s[24] = new Square(24, "Illinois Avenue",       SquareType.PROPERTY);
         s[25] = new Square(25, "B&O Railroad",          SquareType.RAILROAD);
@@ -55,13 +73,13 @@ public final class Board {
         s[27] = new Square(27, "Ventnor Avenue",        SquareType.PROPERTY);
         s[28] = new Square(28, "Water Works",           SquareType.UTILITY);
         s[29] = new Square(29, "Marvin Gardens",        SquareType.PROPERTY);
-        // s[30] = new GoToJailSquare(30, "Go To Jail");
+        s[30] = new GoToJailSquare(30, "Go To Jail");
         s[31] = new Square(31, "Pacific Avenue",        SquareType.PROPERTY);
         s[32] = new Square(32, "North Carolina Avenue", SquareType.PROPERTY);
-        // s[33] = new CommunityChestSquare(33, "Community Chest");
+        s[33] = new CommunityChestSquare(33, "Community Chest");
         s[34] = new Square(34, "Pennsylvania Avenue",   SquareType.PROPERTY);
         s[35] = new Square(35, "Short Line Railroad",   SquareType.RAILROAD);
-        // s[36] = new ChanceSquare(36, "Chance");
+        s[36] = new ChanceSquare(36, "Chance");
         s[37] = new Square(37, "Park Place",            SquareType.PROPERTY);
         s[38] = new Square(38, "Luxury Tax",            SquareType.TAX);
         s[39] = new Square(39, "Boardwalk",             SquareType.PROPERTY);

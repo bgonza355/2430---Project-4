@@ -5,22 +5,57 @@ package monopoly;
  * is acting within. This tracks stuff like the board, the two decks,
  * the landing counter, along with the helper methods that help coordinate
  * those variables.
- * This class is initialized once per game. Running multiple GameContext's 
- * would be used for running multiple independent simulations in which case 
- * each object would have its own board/deck/counter. 
+ * This class is initialized once per game and describes a single simulation. 
+ * Running multiple GameContext's would be used for running multiple independent 
+ * simulations in which case each object would have its own board/deck/counter. 
  */
 public class GameContext {
 	public static final int JAIL_INDEX = 10;
 	
 	private final Board board;
+    private final Deck chanceDeck;
+    private final Deck communityChestDeck;
+
+    private final long[] landingCounts = new long[Board.SIZE];
+	private long totalMoves = 0;
 	
-    public GameContext(Board board) {
+    public GameContext(Board board, Deck chanceDeck, Deck communityChestDeck) {
     	this.board = board;
+    	this.chanceDeck = chanceDeck;
+    	this.communityChestDeck = communityChestDeck;
     }
     
     public Board getBoard() {
         return board;
     }
+    
+    public Deck getChanceDeck() {
+        return chanceDeck;
+    }
+
+    public Deck getCommunityChestDeck() {
+        return communityChestDeck;
+    }
+    
+    public long[] getLandingCounts() {
+        return landingCounts.clone();
+    }
+
+    public long getTotalMoves() {
+        return totalMoves;
+    }
+
+    /**
+     * This method increments the landing counter for the specific square
+     * This should be called once per turn at the end and after the effects
+     * have been applied.
+     * @param index
+     */
+    public void incrementLanding(int index) {
+        landingCounts[Math.floorMod(index, Board.SIZE)]++;
+        totalMoves++;
+    }
+
 
     /**
      * Moves a player to a specific square (tracked by index) and resolve which

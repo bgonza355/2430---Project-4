@@ -1,5 +1,8 @@
 package monopoly;
 
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  * The purpose of this class is to describe a player in the game, such as
  * the player's position, whether they're in-jail.
@@ -13,6 +16,7 @@ public final class PlayerState {
 	// how many turns spent in current jail sentence
 	private int jailTurnCount = 0;	
 	private int consecutiveDoubles = 0;
+	private final List<Card> goojfCards = new ArrayList<>();
 	
     public int getPosition() {
         return position;
@@ -45,6 +49,22 @@ public final class PlayerState {
     
     public int getConsecutiveDoubles() {
         return consecutiveDoubles;
+    }
+    
+    public void addGoojfCard(Card card) {
+    	goojfCards.add(card);
+    }
+    
+    public boolean hasGoojfCard() {
+        return !goojfCards.isEmpty();
+    }
+    
+    public void useGoojfCard() {
+        if (goojfCards.isEmpty()) {
+            throw new IllegalStateException("No GOOJF card to use");
+        }
+        Card card = goojfCards.remove(0);
+        card.getSource().returnGoojfToBottom(card);
     }
     
     public void incrementConsecutiveDoubles() {

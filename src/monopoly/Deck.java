@@ -14,18 +14,24 @@ public final class Deck {
 		this.rng = rng;
 		drawPile.addAll(initialCards);
 		// rng is necessary here so we can reproduce results
-		Collections.shuffle(initialCards, rng); 
+		// it has to be drawPrile as initialCards is immutable.
+		Collections.shuffle(drawPile, rng); 
 	}
 	
 	public void drawAndApply(PlayerState player, GameContext ctx) {
+		if (drawPile.isEmpty()) {
+			recycleDiscardedCards();
+		}
 		Card card = drawPile.remove(drawPile.size() - 1);
         
 		if (card.isGetOutOfJailFree()) {
-			// todo: still gotta fully implement this bad boy
+		    card.setSource(this);
+		    player.addGoojfCard(card);
         } else {
             discardPile.add(card);
         }
 
+		card.getEffect().apply(player, ctx);
 	}
 	
 	/**
@@ -36,5 +42,12 @@ public final class Deck {
 	 */
     public void returnGoojfToBottom(Card card) {
         drawPile.add(0, card);
+    }
+    
+    private void recycleDiscardedCards() {
+    	List<Card> cards = new ArrayList<>(discardPile);
+    	discardPile.clear();
+    	Collections.shuffle(cards, rng);
+        drawPile.addAll(cards);
     }
 }
