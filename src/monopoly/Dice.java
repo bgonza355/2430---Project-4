@@ -3,6 +3,11 @@ package monopoly;
 import java.util.Random;
 
 /**
+ * Team:    Group 2
+ * Members: Logan Chess, Bryant Gonzalez Guzman, Alex Gonzalez Monreal
+ * Course:  CS 2430, Section 502
+ * Project: Programming Project 4 - Spring 2026
+ * 
  * This class models a pair of dice (standard dice each 
  * with six sides). Each roll produces a total ranging from
  * 2 (minimum) to 12 (the maximum possible value both can get)
@@ -20,6 +25,11 @@ public final class Dice {
         this.rng = rng;
     }
 
+    /**
+     * This method produces a Roll record containing a combined 
+     * total (2-12) and a flag indicating whether both dice had 
+     * the same value.  
+     */
     public Roll roll() {
     	int d1 = rng.nextInt(6) + 1;
     	int d2 = rng.nextInt(6) + 1;

@@ -4,6 +4,11 @@ import java.util.List;
 import java.util.Random;
 
 /**
+ * Team:    Group 2
+ * Members: Logan Chess, Bryant Gonzalez Guzman, Alex Gonzalez Monreal
+ * Course:  CS 2430, Section 502
+ * Project: Programming Project 4 - Spring 2026
+ * 
  * The purpose of this class is to actually build the chance and
  * community chest decks. The Deck class should only worry about
  * being a Deck and should not worry about how it is created - that

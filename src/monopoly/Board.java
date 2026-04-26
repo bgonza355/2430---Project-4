@@ -1,5 +1,16 @@
 package monopoly;
 
+/**
+ * Team:    Group 2
+ * Members: Logan Chess, Bryant Gonzalez Guzman, Alex Gonzalez Monreal
+ * Course:  CS 2430, Section 502
+ * Project: Programming Project 4 - Spring 2026
+ * 
+ * This class represents the Monopoly game board as a circular array
+ * of Square objects. The board contains exactly 40 squares. All
+ * index arithmetic is modular, so movement wraps correctly around
+ * the booard.
+ */
 public final class Board {
     public static final int SIZE = 40;
     private final Square[] squares;

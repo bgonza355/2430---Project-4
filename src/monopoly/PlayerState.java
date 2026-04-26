@@ -4,6 +4,11 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
+ * Team:    Group 2
+ * Members: Logan Chess, Bryant Gonzalez Guzman, Alex Gonzalez Monreal
+ * Course:  CS 2430, Section 502
+ * Project: Programming Project 4 - Spring 2026
+ * 
  * The purpose of this class is to describe a player in the game, such as
  * the player's position, whether they're in-jail.
  * Section 8 Question 5 asked about multiple players. This class was implemented

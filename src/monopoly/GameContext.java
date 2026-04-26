@@ -1,6 +1,11 @@
 package monopoly;
 
 /**
+ * Team:    Group 2
+ * Members: Logan Chess, Bryant Gonzalez Guzman, Alex Gonzalez Monreal
+ * Course:  CS 2430, Section 502
+ * Project: Programming Project 4 - Spring 2026
+ * 
  * The purpose of this class is to track the environment that a player
  * is acting within. This tracks stuff like the board, the two decks,
  * the landing counter, along with the helper methods that help coordinate

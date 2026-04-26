@@ -1,6 +1,11 @@
 package monopoly;
 
 /**
+ * Team:    Group 2
+ * Members: Logan Chess, Bryant Gonzalez Guzman, Alex Gonzalez Monreal
+ * Course:  CS 2430, Section 502
+ * Project: Programming Project 4 - Spring 2026
+ * 
  * The purpose of this class is to execute one Monopoly turn
  * for a single player. When I say "turn", I mean a single
  * dice roll plus the consequences of that dice roll like the
