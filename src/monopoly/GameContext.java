@@ -94,60 +94,11 @@ public class GameContext {
         player.resetConsecutiveDoubles();
         player.resetJailTurnCount();
     }
-	//use GOOJF card or leave after 1 turn
-    public void strategyA(PlayerState player) {
-    	boolean goojf  = player.hasGoojfCard();
-    	//check to see if GOOJF card is available if so use immediately 
-    	if(goojf = true) {
-    		totalMoves++;
-    		player.useGoojfCard();
-    		player.setPosition(player.getPosition() + 1);
-    	}
-    	//if not wait 1 turn then leave jail on the next turn
-    	else {
-    	totalMoves= totalMoves + 2;
-    	player.setPosition(player.getPosition() + 1);
-    	}
+    
+    public void releaseFromJail(PlayerState player) {
+        player.setInJail(false);
+        player.resetJailTurnCount();
+        player.resetConsecutiveDoubles();
     }
-	//roll double to get out of jail or leave after 3 turns
-    public void strategyB(PlayerState player,Dice dice) {
-  
-    	int turns = 1 ;
-    	boolean doubles = false;
-    	boolean killswitch = false;
-    //check to see if GOOJF card is available if so use immediately 
-    	boolean goojf  = player.hasGoojfCard();
-    	//check to see if GOOJF card is available if so use immediately 
-    	if( goojf = true) {
-    		totalMoves++;
-    		player.useGoojfCard();
-    		player.setPosition(player.getPosition() + 1);
-    	}
-    	//if not try to roll a double 3 times
-    	else if (goojf = false){
-    		while(killswitch = false) {
-    			//after the 3 attempts
-    			if (turns == 4) {
-    				killswitch = true;
-    			}
-    			
-    			if(dice.roll().isDouble()) {	
-    				doubles = true;
-    				killswitch = true;
-    			}
-    			//increment every time
-    			turns++; 			
-    		}
-    		//if doubles happened
-    		if(doubles = true) {
-    		totalMoves = totalMoves + turns;
-    		player.setPosition(player.getPosition() + 1);
-    		}
-    		//after 3 attempts give up and leave jail on 4th turn	
-    		else{
-    			totalMoves = totalMoves + 4;
-        		player.setPosition(player.getPosition() + 1);	
-    		}
-    	}
-    }
+
 }

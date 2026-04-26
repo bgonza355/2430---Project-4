@@ -18,13 +18,37 @@ public final class TurnEngine {
 	
     private final GameContext ctx;
     private final Dice dice;
+    private final JailStrategy jailStrategy;
     
-    public TurnEngine(GameContext ctx, Dice dice) {
+    public TurnEngine(GameContext ctx, Dice dice, JailStrategy jailStrategy) {
         this.ctx = ctx;
         this.dice = dice;
+        this.jailStrategy = jailStrategy;
     }
     
     public void playTurn(PlayerState player) {
+        if (player.isInJail()) {
+            JailOutcome outcome = jailStrategy.resolve(player, ctx, dice);
+
+            switch (outcome.getType()) {
+                case STAY_IN_JAIL:
+                    player.incrementJailTurnCount();
+                    ctx.incrementLanding(player.getPosition());
+                    return;
+
+                case EXIT_USING_DOUBLES:
+                    ctx.releaseFromJail(player);
+                    ctx.moveBy(player, outcome.getRoll().total());
+                    ctx.incrementLanding(player.getPosition());
+                    return;
+
+                case EXIT_AND_ROLL:
+                    ctx.releaseFromJail(player);
+                    // this cause fall through to normal roll below
+                    break;
+            }
+        }
+        
     	Dice.Roll roll = dice.roll();
     	
     	if (roll.isDouble()) {

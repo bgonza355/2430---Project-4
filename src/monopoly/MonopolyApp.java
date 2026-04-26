@@ -25,7 +25,6 @@ public class MonopolyApp {
         PlayerState player = new PlayerState();
         TurnEngine engine = new TurnEngine(ctx, dice);
         
-        // interesting stuff goes here.
 	}
 
 }
