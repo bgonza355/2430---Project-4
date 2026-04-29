@@ -45,14 +45,13 @@ TBD
 ---
 
 ### Alex Gonzalez Monreal — Verification Lead
-TBD
 
 **Contributions:**
-- TBD
-    - Commit `TBD`
-- TBD
-    - Commit `TBD`
-- TBD
-    - Commit `TBD`
+- Created the uml/pseudocode draft
+    - Commit 221be794ad5f4ca6bd8dbf91cd534b745d73c106, 96d08c92813511e705b0e4319c333db0ee053618
+- Started the implementation of Part 3
+    - Commit e574327a36fb2ceccb389e4d81b1f17be8da02e5 
+- Created  TestCases.java file
+    - Commit e47b432eaa11c96927e0a75ec63a0891baed84e0
 
 ---
