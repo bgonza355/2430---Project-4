@@ -37,12 +37,6 @@ TBD
 
 **Contributions:**
 - TBD
-- TBD
-- TBD
-
-
-**Evidence Pointers:**
-- TBD
     - Commit `TBD`
 - TBD
     - Commit `TBD`
@@ -55,15 +49,10 @@ TBD
 
 **Contributions:**
 - TBD
+    - Commit `TBD`
 - TBD
+    - Commit `TBD`
 - TBD
+    - Commit `TBD`
 
-
-**Evidence Pointers:**
-- TBD
-    - Commit `TBD`
-- TBD
-    - Commit `TBD`
-- TBD
-    - Commit `TBD`
 ---
