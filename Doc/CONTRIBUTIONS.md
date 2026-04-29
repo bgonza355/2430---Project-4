@@ -1,5 +1,5 @@
 # CONTRIBUTIONS.md
-**CS 2430-502 | Programming Project 3: Optimal selection_PLO-CS-4**
+**CS 2430-502 | Programming Project 4: Monopoly Simulation - Capstone_PLO-CS-6**
 
 ---
 
