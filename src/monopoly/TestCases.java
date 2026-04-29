@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import monopoly.JailStrategy.Type;
 
 class TestCases {
+	//setup for test cases
 	long BASE_SEED = 0;
 	long seed = BASE_SEED;
 	Random rng = new Random(seed);
@@ -28,9 +29,10 @@ class TestCases {
 	}
 	@Test
 	public void goojfCards() {
-		//test if player has no goofj card and if they do 
+		//test if player has no goofj card
 		boolean noGoojf = player.hasGoojfCard();
 		assertEquals(noGoojf,false);
+		//Test if player has goofj card
 		player.addGoojfCard(new Card("Get Out of Jail Free", (p, ctx) -> {}, true));
 		boolean actual = player.hasGoojfCard();
 		assertEquals(actual,true);
@@ -45,6 +47,7 @@ class TestCases {
 		assertEquals(isInJail,true);
 	}
 	@Test 
+	//test method that releases player from jail 
 	public void releaseFromJail(){
 		ctx.sendToJail(player);
 		ctx.releaseFromJail(player);
