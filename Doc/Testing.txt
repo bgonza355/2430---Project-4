@@ -1,0 +1,5 @@
+For our project 4 test cases I decided to focus on PlayerState, and GameContext Classes
+The reasoning behind this was those 2 clasess were going to be the ones that are mainly used. The rest of the classes were dependent on PlayerState and GameContext
+For the player class I tested the set/get player position methods, whether the player is in jail, whether the player has a get out of jail free card, and the consecutive doubles tracking
+For GameContext I tested the MoveBy and MoveTo methods which are responsible for moving the player by the number rolled or by chance/community cards destinations.
+For edges cases I decided to test going pass the GO square and when you are in front of GO square to end up behind the start(go back 3 squares).
